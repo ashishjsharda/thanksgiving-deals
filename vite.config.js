@@ -11,7 +11,11 @@ export default defineConfig({
       '@hooks': '/src/hooks',
       '@utils': '/src/utils',
       '@context': '/src/context',
-      '@constants': '/src/constants'
-    }
-  }
+      '@constants': '/src/constants',
+    },
+  },
+  base: './', // Ensures assets are served correctly on deployment
+  build: {
+    outDir: 'dist', // Default for Vite, ensures Vercel points to the correct directory
+  },
 });
