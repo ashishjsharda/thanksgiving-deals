@@ -1,29 +1,28 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
+import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
-        entryFileNames: 'assets/[name].[hash].js',
-        chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: 'assets/[name].[hash][extname]'
-      }
-    }
-  },
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src')
+      '@': path.resolve(__dirname, './src'), // Ensures proper resolution
+      '@components': path.resolve(__dirname, './src/components'),
+      '@services': path.resolve(__dirname, './src/services'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
+      '@utils': path.resolve(__dirname, './src/utils'),
+      '@context': path.resolve(__dirname, './src/context'),
+      '@constants': path.resolve(__dirname, './src/constants')
     }
   },
+  base: './', // Ensures relative paths for assets in production
+  build: {
+    outDir: 'dist', // Output directory for production build
+    rollupOptions: {
+      input: '/index.html', // Entry point for the app
+    },
+  },
   server: {
-    headers: {
-      'Content-Type': 'application/javascript'
-    }
-  }
+    port: 3000, // Optional: Local dev server port
+  },
 });
