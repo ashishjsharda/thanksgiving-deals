@@ -12,14 +12,14 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@utils': path.resolve(__dirname, './src/utils'),
       '@context': path.resolve(__dirname, './src/context'),
-      '@constants': path.resolve(__dirname, './src/constants')
-    }
+      '@constants': path.resolve(__dirname, './src/constants'),
+    },
   },
   base: './', // Ensures relative paths for assets in production
   build: {
     outDir: 'dist', // Output directory for production build
     rollupOptions: {
-      input: '/index.html', // Entry point for the app
+      input: path.resolve(__dirname, 'index.html'), // Entry point for the app
     },
   },
   server: {
